@@ -95,14 +95,14 @@ public class UserRepository {
 		}
 		return userOutputDataModal;
 	}
-	public boolean isAuthOK(String auth_key) {
+	public boolean isAuthOK(String auth_token) {
 		boolean isUserAuthCorrect = false;
-		String sql_query = "SELECT * FROM users WHERE auth_key= '"+auth_key+"'";
+		String sql_query = "SELECT * FROM users WHERE auth_token= '"+auth_token+"'";
 		try { 
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql_query);
 			if (!resultSet.next()){
-					System.out.println("No auth_key found");
+					System.out.println("No auth_token found");
 				}else {
 					isUserAuthCorrect = true;
 				}

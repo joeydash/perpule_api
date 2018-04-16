@@ -6,7 +6,7 @@
     <p>Postman collection <a href="https://www.getpostman.com/collections/5f2b950549e5f11e310c">here</a></p>
     <p>Source code <a href="https://github.com/joeydash/perpule_api.git">here</a></p<br>
     <div>
-        <h4>Dependencies</h4>
+        <h4>Dependencies Used</h4>
         java jersey webapp<br>
         jetty-runner<br>
         jdbc mysql connector<br>

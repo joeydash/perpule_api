@@ -17,11 +17,11 @@ import javax.ws.rs.core.MediaType;
 
 @Path("user_api")
 public class UserApi {
+	private UserRepository userRepository = new UserRepository();
 	@GET
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public List<String> getUsers() 
 	{
-		UserRepository userRepository = new UserRepository();
 		return userRepository.getAllUsers();
 		
 	}
@@ -39,7 +39,7 @@ public class UserApi {
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public UserOutputDataModal createUser(UserInputDataModal userInputputDataModal)
 	{
-		UserRepository userRepository = new UserRepository();
+
 		return userRepository.createUser(userInputputDataModal);
 	}
 	
@@ -49,7 +49,6 @@ public class UserApi {
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public UserOutputDataModal checkUser(UserInputDataModal userInputputDataModal) 
 	{
-		UserRepository userRepository = new UserRepository();
 		return userRepository.checkUser(userInputputDataModal);
 	}
 
