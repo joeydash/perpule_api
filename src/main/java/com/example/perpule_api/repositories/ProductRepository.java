@@ -8,6 +8,8 @@ import com.example.perpule_api.modals.UserOutputDataModal;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductRepository {
 
@@ -29,6 +31,24 @@ public class ProductRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public List<ProductDataModal> getAllProductData() {
+        List<ProductDataModal> list = new ArrayList<>();
+        String sql_query = "SELECT * FROM product_data";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql_query);
+            while(resultSet.next()){
+                ProductDataModal productDataModal = new ProductDataModal();
+                productDataModal.set_id(resultSet.getString(1));
+                productDataModal.setProduct_name(resultSet.getString(2));
+                productDataModal.setProduct_details(resultSet.getString(3));
+                list.add(productDataModal);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public boolean createProduct(ProductDataModal productDataModal) {
@@ -64,5 +84,23 @@ public class ProductRepository {
             e.printStackTrace();
         }
         return productDataModal;
+    }
+
+    public boolean deleteProduct(String id){
+        boolean isDeleted = false;
+        String sql_query = "DELETE * FROM `product_data`  WHERE _id = "+id+"";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql_query);
+            if (!resultSet.next()){
+                Logger.getLogger(getClass()).info("No product");
+            }else {
+                isDeleted= true;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return isDeleted;
     }
 }

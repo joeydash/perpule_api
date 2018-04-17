@@ -2,15 +2,11 @@
 <body>
 <div align="center">
     <h1>Perpule intern-ship problem statement web API</h1>
-    <p>Read Sheet Documentation <a href="https://docs.google.com/spreadsheets/d/1h01M_p_DPuYKb0UKVaOgbOnVCwF-zdgz0j8XxgDj8Vw/edit?usp=sharing">Here</a>
+    This is a gradle project made using jersey library and dependencies like
     <p>Postman collection <a href="https://www.getpostman.com/collections/5f2b950549e5f11e310c">here</a></p>
-    <p>Source code <a href="https://github.com/joeydash/perpule_api.git">here</a></p<br>
-    <div>
-        <h4>Dependencies Used</h4>
-        java jersey webapp<br>
-        jetty-runner<br>
-        jdbc mysql connector<br>
-    </div>
+    <p>Source code <a href="https://github.com/joeydash/perpule_api.git">here</a></p><br>
+    Here is the schema of database<br>
+    <img src="https://postimg.cc/image/kjsnwb3qj/">
 </div>
 </body>
 </html>
