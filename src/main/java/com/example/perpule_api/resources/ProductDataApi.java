@@ -51,7 +51,7 @@ public class ProductDataApi {
 	}
 
     @Path("delete/{id}")
-    @DELETE
+    @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public ResponseModal deleteData(@PathParam("id") String id,@Context HttpHeaders httpheaders){
         String token = httpheaders.getHeaderString("auth_token");
