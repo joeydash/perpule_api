@@ -13,6 +13,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 @Path("user_api")
@@ -50,6 +52,17 @@ public class UserApi {
 	public UserOutputDataModal checkUser(UserInputDataModal userInputputDataModal) 
 	{
 		return userRepository.checkUser(userInputputDataModal);
+	}
+	@GET
+	@Path("check_auth")
+	@Produces({MediaType.TEXT_PLAIN})
+	public String createProductData(@Context HttpHeaders httpheaders) {
+		String token = httpheaders.getHeaderString("auth_token");
+		if (userRepository.isAuthOK(token)){
+			return token;
+		}else{
+			return null;
+		}
 	}
 
 }

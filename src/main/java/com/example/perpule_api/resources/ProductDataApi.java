@@ -23,17 +23,7 @@ public class ProductDataApi {
         return productRepository.getAllProductData();
     }
 
-	@GET
-    @Path("check_auth")
-	@Produces({MediaType.TEXT_PLAIN})
-	public String createProductData(@Context HttpHeaders httpheaders) {
-		String token = httpheaders.getHeaderString("auth_token");
-		if (userRepository.isAuthOK(token)){
-		    return token;
-        }else{
-		    return null;
-        }
-	}
+
 
     @POST
     @Path("create")
@@ -63,11 +53,14 @@ public class ProductDataApi {
     @Path("delete/{id}")
     @DELETE
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public ResponseModal deleteData(@PathParam("id") String id){
+    public ResponseModal deleteData(@PathParam("id") String id,@Context HttpHeaders httpheaders){
+        String token = httpheaders.getHeaderString("auth_token");
         ResponseModal responseModal = new ResponseModal();
-        if (productRepository.deleteProduct(id)){
-            responseModal.setResponse_code("900");
-            responseModal.setResponse_details("deleted");
+        if(userRepository.isAuthOK(token)){
+            if (productRepository.deleteProduct(id)){
+                responseModal.setResponse_code("900");
+                responseModal.setResponse_details("deleted");
+            }
         }
         return responseModal;
     }

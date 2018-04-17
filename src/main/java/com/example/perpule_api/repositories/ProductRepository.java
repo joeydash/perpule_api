@@ -1,10 +1,6 @@
 package com.example.perpule_api.repositories;
 
-import com.example.perpule_api.helpers.RandomString;
 import com.example.perpule_api.modals.ProductDataModal;
-import com.example.perpule_api.modals.UserDBModal;
-import com.example.perpule_api.modals.UserInputDataModal;
-import com.example.perpule_api.modals.UserOutputDataModal;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -54,15 +50,7 @@ public class ProductRepository {
     public boolean createProduct(ProductDataModal productDataModal) {
         boolean isCreated = false;
         String sql_query = "INSERT INTO `product_data` (`product_name`, `product_details`) VALUES ('"+productDataModal.getProduct_name()+"','"+productDataModal.getProduct_details()+"');";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql_query);
-            statement.executeUpdate();
-            isCreated = true;
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        isCreated = doQuery(isCreated, sql_query);
         return isCreated;
     }
 
@@ -88,15 +76,16 @@ public class ProductRepository {
 
     public boolean deleteProduct(String id){
         boolean isDeleted = false;
-        String sql_query = "DELETE * FROM `product_data`  WHERE _id = "+id+"";
+        String sql_query = "DELETE * FROM `product_data`  WHERE _id = "+id;
+        isDeleted = doQuery(isDeleted, sql_query);
+        return isDeleted;
+    }
+
+    private boolean doQuery(boolean isDeleted, String sql_query) {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql_query);
-            if (!resultSet.next()){
-                Logger.getLogger(getClass()).info("No product");
-            }else {
-                isDeleted= true;
-            }
+            PreparedStatement statement = connection.prepareStatement(sql_query);
+            statement.executeUpdate();
+            isDeleted = true;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
