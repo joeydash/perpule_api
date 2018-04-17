@@ -76,7 +76,7 @@ public class ProductRepository {
 
     public boolean deleteProduct(String id){
         boolean isDeleted = false;
-        String sql_query = "DELETE * FROM `product_data`  WHERE _id = "+id;
+        String sql_query = "DELETE FROM `product_data`  WHERE _id = "+id;
         isDeleted = doQuery(isDeleted, sql_query);
         return isDeleted;
     }
